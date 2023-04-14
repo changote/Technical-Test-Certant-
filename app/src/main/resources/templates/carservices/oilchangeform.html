@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="layout/layout :: head"></head>
+
+<body>
+<header th:replace="layout/layout :: header"></header>
+
+<form th:action="@{/turn/oilchangeform/}" th:object="${turn}" method="post">
+    <div class="container py-4">
+        <div class="card bg-light">
+            <div class="card-header" th:text="${title}"></div>
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label>Patente</label>
+                    <label>
+                        <input type="text" th:field="*{plate}" class="form-control" th:errorclass="'form-control alert-danger'"/>
+                    </label>
+                    <small class="form-text text-danger" th:if="${#fields.hasErrors('plate')}"
+                           th:errors="*{plate}"></small>
+                </div>
+            </div>
+
+            <label>Tipo de auto</label>
+            <label>
+                <select name="cartype">
+                    <option value="gasoline">Naftero</option>
+                    <option value="diesel">Diesel</option>
+                </select>
+            </label>
+
+            <label>Tipo de aceite</label>
+            <label>
+                <select name="oiltype">
+                    <option value="basic">Basico</option>
+                    <option value="highperformance">Alto rendimiento</option>
+                </select>
+            </label>
+
+            <div class="form-group row">
+                <label class="col-sm-1 col-form-label">Fecha</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" th:field="*{date}"
+                           th:errorclass="'form-control alert-danger'" /> <small
+                        class="form-text text-danger"
+                        th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></small>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-4">
+                    <button type="submit" th:text="${title}" class="btn btn-primary">Enviar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>
+
+
+<footer th:replace="layout/layout :: footer"></footer>
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>
